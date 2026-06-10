@@ -6,6 +6,7 @@
 
 #include "types/RobotState.hpp"
 #include "types/Task.hpp"
+#include "types/PlannedAction.hpp"
 
 namespace rf
 {
@@ -22,10 +23,11 @@ namespace rf
                                 const std::vector<RobotState>& initial_robot_states,
                                 const std::vector<Task>& tasks) = 0;
 
-        virtual void UpdateAssignments(const Map& map,
-                                    std::vector<RobotState>& robot_states,
-                                    std::vector<Task>& tasks,
-                                    int current_tick) = 0;
+    virtual std::vector<PlannedAction> PlanActions(
+        const Map& map,
+        const std::vector<RobotState>& robot_states,
+        const std::vector<Task>& tasks,
+        int current_tick) = 0;
     };
 }  // namespace rf
 

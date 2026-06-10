@@ -21,17 +21,24 @@ namespace rf
         void SetRobots(std::vector<Robot> robots);
         void SetTasks(std::vector<Task> tasks);
 
-        void Run();
+        void Initialize();
+        void Run(int max_ticks = 1000000);
         bool IsFinished() const;
 
         const RunSummary& GetSummary() const;
 
     private:
         void Step();
-        void ResolveActions();
+        void UpdateMetrics();
+        std::vector<RobotState> BuildRobotStateSnapshot() const;
+        void RosolveConflicts(std::vector<PlannedAction>& actions);
+        void ApplyActions(const std::vector<PlannedAction>& actions);
+        void UpdateTaskCompletion();
         void UpdateMetrics();
 
-    private:
+        Robot* FindRobotById(int robot_id);
+        const Robot* FindRobotById(int robot_id) const;
+
         Map map_;
         std::vector<Robot> robots_;
         std::vector<Task> tasks_;
@@ -39,6 +46,7 @@ namespace rf
         MetricsCollector metrics_;
         RunSummary summary_;
         int current_tick_ {0};
+        bool initialized_ {false};
     };
 }  // namespace rf
 
