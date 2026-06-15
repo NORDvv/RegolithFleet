@@ -3,6 +3,8 @@
 
 #include <memory>
 #include <vector>
+#include <unordered_map>
+#include <utility>
 
 #include "core/Map.hpp"
 #include "core/MetricsCollector.hpp"
@@ -31,7 +33,7 @@ namespace rf
         void Step();
         void UpdateMetrics();
         std::vector<RobotState> BuildRobotStateSnapshot() const;
-        void RosolveConflicts(std::vector<PlannedAction>& actions);
+        void ResolveConflicts(std::vector<PlannedAction>& actions);
         void ApplyActions(const std::vector<PlannedAction>& actions);
         void UpdateTaskCompletion();
         void UpdateMetrics();

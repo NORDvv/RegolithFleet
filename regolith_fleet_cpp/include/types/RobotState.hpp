@@ -15,7 +15,7 @@ namespace rf
         Position position {};
         RobotMode mode {RobotMode::Idle};
         bool carrying_regolith {false};
-        std::optional<Task> current_task {}; //TODO fix
+        int current_task_id {-1};
 
         int total_steps {0};
         int loaded_steps {0};
